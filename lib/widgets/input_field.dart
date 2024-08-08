@@ -4,8 +4,20 @@ import '../utils/constants/colors.dart';
 import '../utils/constants/sizes.dart';
 
 class InputFieldWidget extends StatelessWidget {
-  const InputFieldWidget({super.key, required this.title});
+  const InputFieldWidget({
+    super.key,
+    required this.title,
+    required this.controller,
+    this.obscureText = false,
+    this.isPasswordField = false,
+    this.suffixIcon,
+  });
+
   final String title;
+  final TextEditingController controller;
+  final bool obscureText;
+  final bool isPasswordField;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) {
@@ -20,10 +32,13 @@ class InputFieldWidget extends StatelessWidget {
           height: AppSizes.spaceBfrFields,
         ),
         TextField(
+          controller: controller,
+          obscureText: obscureText,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.smallborderRadius),
             ),
+            suffixIcon: isPasswordField ? suffixIcon : null,
           ),
         ),
       ],
