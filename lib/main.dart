@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:get/get.dart';
 import 'package:my_quote_app/screens/profile.dart';
 import 'package:my_quote_app/utils/constants/colors.dart';
 

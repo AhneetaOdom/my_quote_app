@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:my_quote_app/screens/profile.dart';
 
 import '../controller/landing_page.dart';
+import 'home_page.dart';
 
 class LandingPage extends StatelessWidget {
   LandingPage({super.key});
