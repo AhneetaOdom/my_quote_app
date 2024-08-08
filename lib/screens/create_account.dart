@@ -6,11 +6,16 @@ import '../widgets/button.dart';
 import '../widgets/input_field.dart';
 
 class CreateAccountPage extends StatelessWidget {
-  const CreateAccountPage({super.key});
+  CreateAccountPage({super.key});
+
+  final _fullNameController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: SafeArea(
           child: Padding(
             padding: EdgeInsets.only(left: 16, right: 16),
@@ -27,19 +32,31 @@ class CreateAccountPage extends StatelessWidget {
                   SizedBox(
                     height: AppSizes.fontSizeMd,
                   ),
-                  InputFieldWidget(title: 'Name'),
+                  InputFieldWidget(
+                    title: 'Name',
+                    controller: _fullNameController,
+                  ),
                   SizedBox(
                     height: AppSizes.fontSizeMd,
                   ),
-                  InputFieldWidget(title: 'Email'),
+                  InputFieldWidget(
+                    title: 'Email',
+                    controller: _emailController,
+                  ),
                   SizedBox(
                     height: AppSizes.fontSizeMd,
                   ),
-                  InputFieldWidget(title: 'Password'),
+                  InputFieldWidget(
+                    title: 'Password',
+                    controller: _passwordController,
+                  ),
                   SizedBox(
                     height: AppSizes.fontSizeMd,
                   ),
-                  InputFieldWidget(title: 'Confirm Password'),
+                  InputFieldWidget(
+                    title: 'Confirm Password',
+                    controller: _confirmPasswordController,
+                  ),
                   SizedBox(
                     height: AppSizes.fontSizeXlg,
                   ),
