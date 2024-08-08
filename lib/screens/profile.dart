@@ -10,18 +10,6 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(items: const [
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.home,
-            ),
-            label: 'home'),
-        BottomNavigationBarItem(
-            icon: Icon(
-              Icons.person,
-            ),
-            label: 'Profile')
-      ]),
       appBar: AppBar(
         title: const Text(
           'User Profile',
