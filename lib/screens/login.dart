@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_quote_app/screens/create_account.dart';
 import 'package:my_quote_app/screens/home_page.dart';
 import '../controller/auth_controller.dart';
 import '../utils/constants/colors.dart';
@@ -82,6 +83,34 @@ class LoginPage extends StatelessWidget {
     }
                     },
                   ),
+                  SizedBox(
+                    height: AppSizes.smallDefaultSpace,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => CreateAccountPage()); // Navigate to CreateAccountPage
+                    },
+                    child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          'Don\'t Have an Account?',
+                          style: TextStyle(
+                            fontSize: AppSizes.fontSizeXxs,
+                            color: black,
+                          ),
+                        ),
+                        Text(
+                          ' Create Account',
+                          style: TextStyle(
+                            fontSize: AppSizes.fontSizeXxs,
+                            color: primaryColor,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+
                 ],
               )
           ),

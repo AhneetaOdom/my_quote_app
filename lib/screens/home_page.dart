@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controller/home_page_controller.dart';
 import '../services/quote_services.dart';
+import '../utils/constants/sizes.dart';
+import '../widgets/quote_list_item.dart';
 
 
 class HomePage extends StatelessWidget {
-
-import '../utils/constants/sizes.dart';
-import '../widgets/quote_list_item.dart';class HomePage extends StatelessWidget {
 
   HomePage({super.key});
 
