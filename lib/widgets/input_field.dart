@@ -11,6 +11,7 @@ class InputFieldWidget extends StatelessWidget {
     this.obscureText = false,
     this.isPasswordField = false,
     this.suffixIcon,
+    this.onChanged
   });
 
   final String title;
@@ -18,6 +19,7 @@ class InputFieldWidget extends StatelessWidget {
   final bool obscureText;
   final bool isPasswordField;
   final Widget? suffixIcon;
+  final void Function(String)? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -34,6 +36,7 @@ class InputFieldWidget extends StatelessWidget {
         TextField(
           controller: controller,
           obscureText: obscureText,
+          onChanged: onChanged,
           decoration: InputDecoration(
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(AppSizes.smallborderRadius),
