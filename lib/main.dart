@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 import 'package:my_quote_app/screens/login.dart';
+
 import 'package:my_quote_app/screens/profile.dart';
 import 'package:my_quote_app/utils/constants/colors.dart';
 
@@ -20,7 +22,9 @@ class MyApp extends StatelessWidget {
 
         primarySwatch: primaryColor,
       ),
+
       home: LoginPage(),
+
     );
   }
 }
