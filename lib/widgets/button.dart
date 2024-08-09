@@ -1,28 +1,40 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/sizes.dart';
 
 class PrimaryButton extends StatelessWidget {
-  const PrimaryButton({super.key, required this.title});
+  const PrimaryButton({
+    super.key,
+    required this.title,
+    this.isDisabled = false,
+    this.isLoading = false,
+    this.onTap,
+  });
 
   final String title;
+  final bool isDisabled;
+  final bool isLoading;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 40,
-      width: 343,
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: primaryColor,
-          borderRadius: BorderRadius.circular(AppSizes.smallborderRadius)),
-      child: Text(
-        title,
-        style: const TextStyle(
-            fontSize: AppSizes.fontSizeMd,
-            fontWeight: AppSizes.fontWeightW400,
-            color: Colors.white),
+    return GestureDetector(
+      onTap: isDisabled || isLoading ? null : onTap,
+      child: Container(
+        width: Get.width,
+        height: 48.0,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: primaryColor,
+            borderRadius: BorderRadius.circular(AppSizes.smallborderRadius)),
+        child: Text(
+          title,
+          style: const TextStyle(
+              fontSize: AppSizes.fontSizeMd,
+              fontWeight: AppSizes.fontWeightW400,
+              color: Colors.white),
+        ),
       ),
     );
   }
