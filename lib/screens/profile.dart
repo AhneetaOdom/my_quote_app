@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
+import '../controller/auth_controller.dart';
+import '../controller/home_page_controller.dart';
 import '../utils/constants/colors.dart';
 import '../utils/constants/images.dart';
 import '../utils/constants/sizes.dart';
+import 'login.dart';
 
 class ProfilePage extends StatelessWidget {
-  const ProfilePage({super.key});
+  ProfilePage({super.key});
+
+
+  final AuthController authController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +23,10 @@ class ProfilePage extends StatelessWidget {
               fontSize: AppSizes.fontSizeLg,
               fontWeight: AppSizes.fontWeightBold),
         ),
-        automaticallyImplyLeading: true,
+        automaticallyImplyLeading: false,
       ),
-      body: const SafeArea(
-          child: Padding(
+      body:  SafeArea(
+          child:Obx(() => Padding(
             padding: EdgeInsets.only(left: 16, right: 16),
             child: Column(
               children: [
@@ -152,24 +158,29 @@ class ProfilePage extends StatelessWidget {
                 SizedBox(height: AppSizes.mediumDefaultSpace),
 
                 //logout
-                Row(
-                  children: [
-                    Icon(Icons.logout),
-                    SizedBox(
-                      width: AppSizes.mediumDefaultSpace,
-                    ),
-                    Text(
-                      'Logout',
-                      style: TextStyle(
-                          fontSize: AppSizes.fontSizeSm,
-                          color: black,
-                          fontWeight: AppSizes.fontWeightNormal),
-                    ),
-                  ],
+                GestureDetector(
+                  onTap: (){
+                    authController.logoutUser().then((value) => Get.offAll(LoginPage()));
+                  },
+                  child: Row(
+                    children: [
+                      Icon(Icons.logout),
+                      SizedBox(
+                        width: AppSizes.mediumDefaultSpace,
+                      ),
+                      Text(
+                        'Logout',
+                        style: TextStyle(
+                            fontSize: AppSizes.fontSizeSm,
+                            color: black,
+                            fontWeight: AppSizes.fontWeightNormal),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
-          )),
+          ))),
     );
   }
 }

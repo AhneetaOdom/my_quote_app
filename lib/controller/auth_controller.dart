@@ -2,6 +2,8 @@ import 'package:get/get.dart';
 
 import 'package:get/get.dart';
 
+import '../services/firebase_service.dart';
+
 class AuthController extends GetxController {
   var _isFullNameValid = false.obs;
   var _isEmailValid = false.obs;
@@ -73,6 +75,57 @@ class AuthController extends GetxController {
   void togglePasswordVisibility() {
     _isPasswordVisible.value = !_isPasswordVisible.value;
     update();
+  }
+
+  final _firebaseService = FirebaseService();
+  var _isAuthLoading = false.obs;
+  bool get isAuthLoading => _isAuthLoading.value;
+
+  Future<bool> registerUser({required String email, required String password, required String fullName}) async {
+    _isAuthLoading.value = true;
+    update();
+    try {
+      final result = await _firebaseService.registerUser(email: email, password: password);
+      if (result != null && result.user?.uid != null) {
+        await _firebaseService.saveUserToFireStore(fullName: fullName, email: email);
+        _isAuthLoading.value = false;
+        update();
+        return true;
+      } else {
+        _isAuthLoading.value = false;
+        update();
+        return false;
+      }
+    } catch (e) {
+      _isAuthLoading.value = false;
+      update();
+      return false;
+    }
+  }
+
+  Future<bool> loginUser({required String email, required String password}) async {
+    _isAuthLoading.value = true;
+    update();
+    try {
+      final result = await _firebaseService.loginUser(email: email, password: password);
+      if (result != null && result.user?.uid != null) {
+        _isAuthLoading.value = false;
+        update();
+        return true;
+      } else {
+        _isAuthLoading.value = false;
+        update();
+        return false;
+      }
+    } catch (e) {
+      _isAuthLoading.value = false;
+      update();
+      return false;
+    }
+  }
+
+  Future<void> logoutUser() async{
+    await _firebaseService.logOutUser();
   }
 }
 

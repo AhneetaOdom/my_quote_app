@@ -6,7 +6,7 @@ import '../utils/constants/colors.dart';
 import '../utils/constants/sizes.dart';
 import '../widgets/button.dart';
 import '../widgets/input_field.dart';
-import 'home_page.dart';
+import 'landing_page.dart';
 
 class CreateAccountPage extends StatelessWidget {
   CreateAccountPage({super.key});
@@ -120,12 +120,23 @@ class CreateAccountPage extends StatelessWidget {
                 ),
                 PrimaryButton(
                   title: 'Create Account',
+                  isLoading: controller.isAuthLoading,
                   onTap: () {
                     if (controller.isFullNameValid &&
                         controller.isEmailValid &&
                         controller.isPasswordValid &&
                         controller.isConfirmPasswordValid) {
-                      Get.to(HomePage());
+                      controller.registerUser(
+                          email: _emailController.text,
+                          password: _passwordController.text,
+                          fullName: _fullNameController.text
+                      ).then(
+                              (value) {
+                            if (value) {
+                              Get.to(()=>LandingPage());
+                            }
+                          }
+                      );
                     }
                   },
                 ),

@@ -1,7 +1,13 @@
+import 'dart:developer';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+
+import '../models/user_model.dart';
 
 class FirebaseService {
   final firebaseAuth = FirebaseAuth.instance;
+  final fireStore = FirebaseFirestore.instance;
 
   Future<UserCredential?> registerUser({
     required String email,
@@ -65,6 +71,50 @@ class FirebaseService {
       print('Error: $e');
       return null;
     }
+  }
+  saveUserToFireStore({required String fullName, required String email}) async {
+    try {
+      final user = firebaseAuth.currentUser;
+      if (user != null) {
+        await fireStore.collection('USERS').doc(user.uid).set({
+          'fullName': fullName,
+          'email': email,
+        });
+      }
+    } on FirebaseException catch (e) {
+      log('Error saving user to Firestore: $e');
+    }
+  }
+
+  Future<UserModel?> getUserFromFireStore() async {
+    try {
+      final user = firebaseAuth.currentUser;
+      if (user != null) {
+        final documentSnapshot = await fireStore.collection('USERS').doc(user.uid).get();
+        if (documentSnapshot.exists) {
+          final data = documentSnapshot.data();
+          log('User data: ${firebaseAuth.currentUser?.photoURL}');
+          return UserModel(
+              fullName: data?['fullName'],
+              email: data?['email'],
+              profilePictureUrl: firebaseAuth.currentUser?.photoURL
+          );
+        } else {
+          log('No user document found for ID: ${user.uid}');
+          return null;
+        }
+      } else {
+        log('No user signed in.');
+        return null;
+      }
+    } on FirebaseException catch (e) {
+      log('Error retrieving user from Firestore: $e');
+      return null;
+    }
+  }
+
+  Future<void>logOutUser() async{
+    await firebaseAuth.signOut();
   }
 
 }
