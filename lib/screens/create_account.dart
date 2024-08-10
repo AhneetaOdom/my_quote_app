@@ -22,9 +22,9 @@ class CreateAccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Obx(() => Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: Center(
+        child: Obx(() => SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 16, right: 16),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
