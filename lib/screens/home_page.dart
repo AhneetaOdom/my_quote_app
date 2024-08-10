@@ -7,7 +7,6 @@ import '../widgets/quote_list_item.dart';
 
 
 class HomePage extends StatelessWidget {
-
   HomePage({super.key});
 
   final controller = Get.put(HomePageController(quoteService: QuoteService()));
